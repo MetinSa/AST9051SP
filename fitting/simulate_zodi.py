@@ -49,7 +49,7 @@ def get_dirbe_day_scanning_strategy(day: int) -> ScanningStrategyDay:
 
 def main() -> None:
     model = zodipy.Zodipy("DIRBE", parallel=True)
-    week_map = u.Quantity(np.zeros(hp.nside2npix(NSIDE)), u.MJy / u.sr)
+    week_map = np.zeros(hp.nside2npix(NSIDE))
     hit_map = np.zeros_like(week_map)
 
     for day in VALID_DAYS:
@@ -60,7 +60,7 @@ def main() -> None:
             freq=FREQ,
             nside=NSIDE,
             return_comps=True,
-        )[0]  # only cloud component
+        )[0].to_value()  # only cloud component
 
         unique_pix, counts = np.unique(scanning_strategy.pixels, return_counts=True)
         week_map[unique_pix] 
