@@ -3,7 +3,7 @@
 This repository contains the project deliverables for the special curriculum course AST9051SP - Statistical Methods in Computational Cosmology, which i took during my last year as a PhD student at UiO. 
 
 ## Main deliverables:
-- Jupyter notebook with exercises from [Data analysis recipes: Fitting a model to data](https://arxiv.org/abs/1008.4686)
+- Jupyter notebook in `exercises.ipynb` with exercises from [Data analysis recipes: Fitting a model to data](https://arxiv.org/abs/1008.4686)
 - Project report in `report_AST9051SP.pdf`
 - Source code to reproduce results in report in `src/`
 
