@@ -86,12 +86,13 @@ def metropolis_hastings(
             theta_current = theta_new
             chisq_current = chisq_new
             accepted_proposals += 1
+            print(f"Accepted! rate: {accepted_proposals / (i)}", "iteration: ", i)
 
         # store the current parameters and chi-squared value
         theta_trace[:, i - 1] = theta_current
         chisq_trace[i - 1] = chisq_current
 
-    print(f"Acceptance rate: {accepted_proposals / (iterations-1)}")
+    print(f"Final acceptance rate: {accepted_proposals / (iterations-1)}")
 
     return theta_trace, chisq_trace
 

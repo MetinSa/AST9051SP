@@ -5,8 +5,7 @@ from dataclasses import asdict
 from functools import partial
 from typing import Any, Callable, Mapping, Protocol, Sequence
 
-# import numpy as np
-import autograd.numpy as np
+import numpy as np
 
 import numpy.typing as npt  # type: ignore
 
@@ -395,6 +394,7 @@ def compute_feature_density_rmm(
         theta_rad=theta_rad,
     )
 
+
 def dndn0(
     X_helio: np.ndarray,
     X_0: np.ndarray,
@@ -408,21 +408,25 @@ def dndn0(
     beta: float,
     gamma: float,
 ) -> np.ndarray:
-    a = compute_cloud_density(
-        X_helio=X_helio,
-        X_0=X_0,
-        sin_Omega_rad=sin_Omega_rad,
-        cos_Omega_rad=cos_Omega_rad,
-        sin_i_rad=sin_i_rad,
-        cos_i_rad=cos_i_rad,
-        n_0=n_0,
-        mu=mu,
-        alpha=alpha,
-        beta=beta,
-        gamma=gamma,
-    ) / n_0
+    a = (
+        compute_cloud_density(
+            X_helio=X_helio,
+            X_0=X_0,
+            sin_Omega_rad=sin_Omega_rad,
+            cos_Omega_rad=cos_Omega_rad,
+            sin_i_rad=sin_i_rad,
+            cos_i_rad=cos_i_rad,
+            n_0=n_0,
+            mu=mu,
+            alpha=alpha,
+            beta=beta,
+            gamma=gamma,
+        )
+        / n_0
+    )
 
     return a
+
 
 def dndgamma(
     X_helio: np.ndarray,
@@ -453,6 +457,7 @@ def dndgamma(
     nc = n_0 * R_cloud**-alpha * np.exp(-beta * g**gamma)
 
     return -beta * g**gamma * np.log(g) * nc
+
 
 def dndalpha(
     X_helio: np.ndarray,
@@ -508,8 +513,7 @@ GRAD_FUNCS: dict[Any, ComputeDensityFunc] = {
 
 
 class ComponentDensityFn(Protocol):
-    def __call__(self, X_helio: npt.NDArray[np.float64]) -> npt.NDArray[np.float64]:
-        ...
+    def __call__(self, X_helio: npt.NDArray[np.float64]) -> npt.NDArray[np.float64]: ...
 
 
 def construct_density_partials(
@@ -544,7 +548,9 @@ def construct_density_partials(
             comp_dict.update(dynamic_params)
 
         # Remove excess intermediate parameters from the component dict.
-        comp_params = {key: value for key, value in comp_dict.items() if key in func_params}
+        comp_params = {
+            key: value for key, value in comp_dict.items() if key in func_params
+        }
         partial_func = partial(DENSITY_FUNCS[type(comp)], **comp_params)
         partial_density_funcs.append(partial_func)
 
@@ -585,7 +591,9 @@ def construct_density_partials_comps(
             comp_dict.update(dynamic_params)
 
         # Remove excess intermediate parameters from the component dict.
-        comp_params = {key: value for key, value in comp_dict.items() if key in func_params}
+        comp_params = {
+            key: value for key, value in comp_dict.items() if key in func_params
+        }
         partial_func = partial(DENSITY_FUNCS[type(comp)], **comp_params)
         if gradient is not None:
             partial_func = partial(GRAD_FUNCS[gradient], **comp_params)
