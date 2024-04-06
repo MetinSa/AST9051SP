@@ -161,4 +161,7 @@ cython_debug/
 
 figs/
 .DS_Store
-data
+*.npy
+*.h5
+test.ipynb
+65ca134012745406216e5b5a

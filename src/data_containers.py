@@ -56,3 +56,19 @@ class DirbeData:
             obs_time.append(obs_time_day)
 
         return cls(zodi=zodi, pixels=pixels, obs_pos=obs_pos, obs_time=obs_time)
+
+
+@dataclass
+class HoggData:
+    """Container for fitting a line to data table from Hogg et al. 2010."""
+
+    x: np.ndarray
+    y: np.ndarray
+    sigma_y: np.ndarray
+    sigma_x: np.ndarray
+    rho_xy: np.ndarray
+
+    @classmethod
+    def from_table(cls, table_path: Path) -> Self:
+        table = np.loadtxt(table_path, usecols=(1, 2, 3, 4, 5), unpack=True)
+        return cls(*table)
