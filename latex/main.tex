@@ -25,7 +25,7 @@ This document is accompanied by a Jupyter notebook where we solve a subset of th
     \caption{A small subsection of the data worked with in this project. The orange curve is the simulated $z_t$ timestream with ZodiPy, and the blue curve is data stream $d$ where we have added noise.}
     \label{fig:data}
 \end{figure}
-We will now attempt to fit the two non-linear parameters ($\alpha$, $\gamma$) in the state-of-the-art COBE/DIRBE zodiacal light model\cite{Kelsall1998}. Zodiacal light (ZL) is scattered and re-emitted sunlight by interplanetary dust in the Solar system. In the following, we will fit this model to a data stream containing ZL simulated with ZodiPy\cite{zodipy} and white noise. For simplicity, the simulated ZL only contains the smooth component (diffuse cloud component) of the zodiacal cloud. This data stream represents the observed emission by the COBE/DIRBE experiment at $12 \mu$m during DIRBE observational days 50-59. A small subsection of the simulated data is shown in Figure \ref{fig:data}. The true parameter values used to generate this data are $\theta_\mathrm{true} = (\alpha_\mathrm{true}, \gamma_\mathrm{true}) = (1.337, 0.942)$.
+We will now attempt to fit the two non-linear parameters ($\alpha$, $\gamma$) in the state-of-the-art COBE/DIRBE zodiacal light model\cite{Kelsall1998}. Zodiacal light (ZL) is scattered and re-emitted sunlight by interplanetary dust in the Solar system. In the following, we will fit this model to a data stream containing ZL simulated with ZodiPy\cite{San2022, San2024} and white noise. For simplicity, the simulated ZL only contains the smooth component (diffuse cloud component) of the zodiacal cloud. This data stream represents the observed emission by the COBE/DIRBE experiment at $12 \mu$m during DIRBE observational days 50-59. A small subsection of the simulated data is shown in Figure \ref{fig:data}. The true parameter values used to generate this data are $\theta_\mathrm{true} = (\alpha_\mathrm{true}, \gamma_\mathrm{true}) = (1.337, 0.942)$.
 
 The data model is given as
 \begin{equation}
@@ -123,19 +123,19 @@ We select initial values $\theta_0 = (\alpha_0, \gamma_0) = (1.2, 0.92)$. Additi
 \begin{figure}
     \centering
     \includegraphics[width=0.9\textwidth]{figs/mh.pdf}
-    \caption{Nike logo}
+    \caption{Trace plot showing 10000 samples (including the burn-in phase) of the parameters $\alpha$, $\gamma$, and the $\chi^2$ metric, using the Metrpolis-Hasting algorithm.}
     \label{fig:mh}
 \end{figure}
 \begin{figure}
     \centering
     \includegraphics[width=0.9\textwidth]{figs/mh_postburnin.pdf}
-    \caption{Nike logo}
+    \caption{Trace plot showing 9000 samples of the parameters $\alpha$, $\gamma$, and the $\chi^2$ metric, using the Metrpolis-Hasting algorithm.}
     \label{fig:mh_burnin}
 \end{figure}
 \begin{figure}
     \centering
     \includegraphics[width=0.9\textwidth]{figs/mh_corner.pdf}
-    \caption{Nike logo}
+    \caption{Corner plot showing the 1- and 2-D histograms and the parameters $\alpha$, $\gamma$, obtained from post burn-in Metropolis Hastings samples.}
     \label{fig:mh_corner}
 \end{figure}
 
@@ -211,19 +211,19 @@ The HMC solution perfectly reproduces the underlying true parameters, with small
 \begin{figure}
     \centering
     \includegraphics[width=0.9\textwidth]{figs/hmc.pdf}
-    \caption{Nike logo}
+    \caption{Trace plot showing 10000 samples (including the burn-in phase) of the parameters $\alpha$, $\gamma$, and the $\chi^2$ metric, using the Hamiltonian Monte Carlo algorithm.}
     \label{fig:hmc}
 \end{figure}
 \begin{figure}
     \centering
     \includegraphics[width=0.9\textwidth]{figs/hmc_burnin.pdf}
-    \caption{Nike logo}
+    \caption{Trace plot showing 9000 samples of the parameters $\alpha$, $\gamma$, and the $\chi^2$ metric, using the Hamiltonian Monte Carlo algorithm.}
     \label{fig:hmc_burnin}
 \end{figure}
 \begin{figure}
     \centering
     \includegraphics[width=0.9\textwidth]{figs/hmc_corner.pdf}
-    \caption{Nike logo}
+    \caption{Corner plot showing the 1- and 2-D histograms and the parameters $\alpha$, $\gamma$, obtained from post burn-in Hamiltonian Monte Carlo samples.}
     \label{fig:hmc_corner}
 \end{figure}
 
